@@ -5,6 +5,8 @@ def prog():
     TAReport = []
     PracReport = []
     JourReport = []
+    
+    modulecount : int
 
     with open(filename, mode='r', encoding='utf-8') as file:
         reader = csv.DictReader(file)
@@ -13,12 +15,10 @@ def prog():
             stop = False
 
             AttArray = []
-            
             TAArray = []
-            
             PracArray = []
-            
             JourArray = []
+            
 
             try:
                 for x in range(10):
@@ -26,6 +26,8 @@ def prog():
                     TAArray.append(row["TA" + str(x+1)])
                     PracArray.append(row["Praktikum" + str(x+1)])
                     JourArray.append(row["Jurnal" + str(x+1)])
+
+                    modulecount = x+1
 
             except KeyError:
                 pass
@@ -56,6 +58,8 @@ def prog():
                 if not is_final_grade_valid(float(JourArray[i])):
                     JourReport.append("Anomalous Module " + str(i+1) + " Jour value detected at " + row["Nim"] + '!')
                     JourReport.append("The Anomalous value in question : " + JourArray[i])
+
+    print("\n////Displaying data from", modulecount, "Modules ////\n")
 
     print("///////////// TA REPORT /////////////")
     for message in TAReport:
